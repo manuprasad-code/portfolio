@@ -3,93 +3,356 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Underwater Inspection vehicle — Manu Prasad</title>
-<script src="./image-slot.js"></script>
+<title>Underwater Inspection Vehicle — Project Report — Manu Prasad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  :root{--paper:#F1EEE9;--ink:#1C1B19;--accent:#E2571F;--dark:#1B1B1A;--hair:rgba(28,27,25,0.10);--dim:rgba(28,27,25,0.55);}
+  :root{
+    --page:#FFFFFF; --band:#F7F8F9; --ink:#15181C; --body:#4A5057; --muted:#8A9099;
+    --rule:#E3E6E9; --accent:#E2571F; --ok:#1F6F4A;
+  }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;}
-  h1,h2,h3{font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;margin:0;line-height:1.05;}
+  body{margin:0;background:var(--band);color:var(--ink);font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{margin:0;line-height:1.14;font-weight:600;}
+  p{margin:0;}
   a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
   .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
-  .back{transition:gap .4s ease;} .back:hover{gap:18px;}
+  .sheet{max-width:1180px;margin:0 auto;background:var(--page);}
+  .pad{padding:0 40px;}
+
+  /* section scaffolding — the report grid */
+  .sec{padding:38px 0;border-top:1px solid var(--rule);}
+  .sec.alt{background:var(--band);}
+  .shead{display:grid;grid-template-columns:78px minmax(0,1fr);gap:0 20px;align-items:start;margin-bottom:26px;}
+  .snum{font-size:30px;font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1;}
+  .stitle{font-size:21px;letter-spacing:-0.01em;margin-bottom:7px;}
+  .slead{font-size:13.5px;line-height:1.55;color:var(--body);max-width:86ch;}
+  .cols{display:grid;grid-template-columns:78px minmax(0,1fr);gap:0 20px;}
+  .pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;}
+  .pair > section + section{border-left:1px solid var(--rule);}
+
+  /* atoms */
+  .box{border:1px solid var(--rule);background:var(--page);}
+  .lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;}
+  .sub{font-size:12.5px;line-height:1.55;color:var(--body);}
+  table{width:100%;border-collapse:collapse;}
+  th,td{text-align:left;padding:10px 13px;font-size:12.5px;border-bottom:1px solid var(--rule);}
+  th{background:var(--band);font-weight:600;font-size:12px;color:var(--ink);}
+  td:last-child{color:var(--body);}
+  tr:last-child td{border-bottom:0;}
+  .fig{background:var(--band);border:1px solid var(--rule);overflow:hidden;}
+  .fig img{width:100%;height:100%;object-fit:cover;}
+  .fig.fit{background:#fff;}
+  .fig.fit img{object-fit:contain;}
+  .cap{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5;}
+  .cap b{color:var(--ink);font-weight:600;}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;border:1px solid rgba(255,255,255,0.22);border-radius:3px;padding:6px 10px;color:rgba(255,255,255,0.82);}
+  .cnum{width:22px;height:22px;border-radius:99px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;flex:none;}
+  .check{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink);}
+  .check svg{color:var(--ok);flex:none;}
+  .tbf{color:var(--muted);font-style:italic;}
+  .plus{font-size:12.5px;line-height:1.75;color:var(--body);}
+  .plus span{color:var(--muted);}
+
+  @media (max-width:860px){
+    .pad{padding:0 22px;}
+    .shead,.cols{grid-template-columns:minmax(0,1fr);gap:10px;}
+    .pair{grid-template-columns:minmax(0,1fr);}
+    .pair > section + section{border-left:0;border-top:1px solid var(--rule);}
+    .g3,.g4{grid-template-columns:minmax(0,1fr) !important;}
+  }
 </style>
 </head>
 <body>
-  <header style="max-width:1560px;margin:0 auto;padding:44px 64px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-    <a href="index.html#works" class="back mono" style="display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.22em;">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
-      ALL WORK
-    </a>
-    <div class="mono" style="font-size:11px;letter-spacing:0.24em;color:var(--dim);">AGV-2 / WAREHOUSE AGV</div>
+<div class="sheet">
+
+  <!-- ══ HERO ══ -->
+  <header style="position:relative;background:#101317;color:#fff;overflow:hidden;">
+    <div style="position:absolute;inset:0;"><img src="assets/auv-hero.jpg" alt="Underwater inspection vehicle at poolside" style="width:100%;height:100%;object-fit:cover;object-position:60% 50%;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#101317 2%,rgba(16,19,23,0.90) 40%,rgba(16,19,23,0.78) 100%);"></div>
+    <div class="pad" style="position:relative;padding-top:24px;">
+      <a href="index.html#works" class="mono" style="display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:0.1em;color:#fff;">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        All Projects
+      </a>
+    </div>
+    <div class="pad" style="position:relative;padding-top:26px;padding-bottom:30px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:34px;align-items:start;">
+      <div>
+        <h1 style="font-size:clamp(30px,4.4vw,48px);font-weight:600;letter-spacing:-0.025em;line-height:1.06;">Underwater<br>Inspection Vehicle</h1>
+        <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,0.92);max-width:52ch;margin-top:14px;">A modular, shallow-water inspection platform built to carry varying payloads — reconfigurable thrusters and interchangeable hull sizes on one common architecture.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:14px;max-width:210px;">
+        <p style="font-size:13px;line-height:1.55;color:#fff;">“One architecture, many missions — modularity carried the whole design.”</p>
+      </div>
+    </div>
+    <div class="pad" style="position:relative;background:#101317;border-top:1px solid rgba(255,255,255,0.14);padding-top:16px;padding-bottom:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+          <div><div style="font-size:12.5px;font-weight:600;">Stage</div><div style="font-size:12px;color:rgba(255,255,255,0.86);">Concept → Prototype → Validation</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          <div><div style="font-size:12.5px;font-weight:600;">Industry</div><div style="font-size:12px;color:rgba(255,255,255,0.86);">Maritime / Subsea Robotics</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="m7 8 5-5 5 5"/><path d="M5 21h14"/></svg>
+          <div><div style="font-size:12.5px;font-weight:600;">Depth Rating</div><div class="mono" style="font-size:12px;color:rgba(255,255,255,0.86);">Up to 300 m</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h12l2 14H4z"/><path d="M9 6V4h6v2"/></svg>
+          <div><div style="font-size:12.5px;font-weight:600;">Target Mass</div><div class="mono" style="font-size:12px;color:rgba(255,255,255,0.86);">12 kg</div></div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <section style="max-width:1560px;margin:0 auto;padding:70px 64px 0;">
-    <h1 style="font-weight:800;font-size:clamp(38px,6.4vw,92px);letter-spacing:-0.035em;text-transform:uppercase;max-width:20ch;">Underwater Inspection vehicle</h1>
-    <p style="font-size:18px;line-height:1.7;color:var(--dim);max-width:60ch;margin:28px 0 0;">One or two lines that frame the project — what it is, who it was for, and what you owned.</p>
+  <!-- ══ 01 / 02 ══ -->
+  <div style="border-top:1px solid var(--rule);">
+    <section style="padding:34px 0;">
+      <div class="pad">
+        <div class="shead" style="margin-bottom:18px;">
+          <div class="snum">01</div>
+          <div>
+            <h2 class="stitle">Problem &amp; Constraints</h2>
+            <p class="slead">A vehicle capable of inspecting at shallow depths, targeted to carry varying types of payloads. The architecture had to be modular enough to adjust thruster configuration and swap between a higher or lower size hull.</p>
+          </div>
+        </div>
+        <div class="box" style="max-width:720px;">
+          <table>
+            <thead><tr><th style="width:52%;">Requirement</th><th>Target / Limit</th></tr></thead>
+            <tbody>
+              <tr><td>Target weight</td><td>12 kg</td></tr>
+              <tr><td>Overall size (L × W × H)</td><td>200 × 300 × 100 mm</td></tr>
+              <tr><td>Payload</td><td>10 kg</td></tr>
+              <tr><td>Depth rating</td><td>Up to 300 m</td></tr>
+              <tr><td>Thruster configuration</td><td>Reconfigurable</td></tr>
+              <tr><td>Hull</td><td>Interchangeable — two sizes</td></tr>
+              <tr><td>Operating environment</td><td>Shallow water inspection</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  <section class="sec" style="border-top:1px solid var(--rule);">
+    <div class="pad">
+      <div class="shead">
+        <div class="snum">02</div>
+        <div>
+          <h2 class="stitle">Concept Development</h2>
+          <p class="slead tbf">Write the concept narrative here — the architectures explored, how they were compared, and why the selected one won. Click any sketch to open it full size.</p>
+        </div>
+      </div>
+      <div class="cols">
+        <div></div>
+        <div class="g3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;">
+          <div>
+            <div style="font-size:13.5px;font-weight:600;">Concept A</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:9px;">Architecture name</div>
+            <a href="assets/auv-02-concept-a.jpg" target="_blank" rel="noopener" class="fig fit" style="display:block;height:440px;cursor:zoom-in;"><img src="assets/auv-02-concept-a.jpg" alt="Concept A sketch"></a>
+            <p class="plus" style="margin-top:9px;">+ Pro to add<br><span>– Con to add</span></p>
+          </div>
+          <div>
+            <div style="font-size:13.5px;font-weight:600;">Concept B</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:9px;">Architecture name</div>
+            <a href="assets/auv-02-concept-b.jpg" target="_blank" rel="noopener" class="fig fit" style="display:block;height:440px;cursor:zoom-in;"><img src="assets/auv-02-concept-b.jpg" alt="Concept B sketch"></a>
+            <p class="plus" style="margin-top:9px;">+ Pro to add<br><span>– Con to add</span></p>
+          </div>
+          <div class="box" style="padding:13px;background:#F2F5F8;border-color:#D8E0E8;">
+            <div style="font-size:13.5px;font-weight:600;">Concept C</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:9px;">Architecture name</div>
+            <a href="assets/auv-02-concept-c.jpg" target="_blank" rel="noopener" class="fig fit" style="display:block;height:414px;cursor:zoom-in;"><img src="assets/auv-02-concept-c.jpg" alt="Concept C sketch"></a>
+            <p class="plus" style="margin-top:9px;">+ Pro to add<br>+ Pro to add</p>
+            <div class="check" style="margin-top:11px;font-weight:600;font-size:12px;">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" style="color:#15181C;"><circle cx="12" cy="12" r="10" fill="#15181C"/><path d="m8 12.4 2.6 2.6L16.4 9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Selected Design
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section style="max-width:1560px;margin:0 auto;padding:56px 64px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
-        <div style="position:relative; height:340px; border-radius:16px; overflow:hidden; background:var(--dark); color:#EDEAE4; border:1px solid var(--hair);">
-          <image-slot id="auv-detail-1" shape="rect" fit="cover" placeholder="Underwater Inspection vehicle — image 1"></image-slot>
+  <!-- ══ 03 KEY ENGINEERING CHALLENGES ══ -->
+  <section class="sec alt">
+    <div class="pad">
+      <div class="shead">
+        <div class="snum">03</div>
+        <div>
+          <h2 class="stitle">Key Engineering Challenges</h2>
+          <p class="slead">Three problems defined the design: keeping water out at depth, keeping the vehicle balanced, and keeping the electronics cool inside a sealed hull.</p>
         </div>
-        <div style="position:relative; height:340px; border-radius:16px; overflow:hidden; background:var(--dark); color:#EDEAE4; border:1px solid var(--hair);">
-          <image-slot id="auv-detail-2" shape="rect" fit="cover" placeholder="Underwater Inspection vehicle — image 2"></image-slot>
+      </div>
+      <div class="cols">
+        <div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;" class="g3">
+          <div style="padding-right:22px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;"><span class="cnum">1</span><h3 style="font-size:14.5px;">Sealing for 300 m depth</h3></div>
+            <p class="sub" style="margin-bottom:14px;">Design and manufacturing of pressure penetrators and the sealing stack that holds at full depth rating.</p>
+            <a href="assets/auv-03-sealing.jpg" target="_blank" rel="noopener" class="fig fit" style="display:block;height:210px;cursor:zoom-in;"><img src="assets/auv-03-sealing.jpg" alt="Sealing and penetrators"></a>
+            <div class="cap"><b>Seal stack / penetrator detail</b></div>
+          </div>
+          <div style="padding:0 22px;border-left:1px solid var(--rule);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;"><span class="cnum">2</span><h3 style="font-size:14.5px;">CB &amp; CG management</h3></div>
+            <p class="sub" style="margin-bottom:14px;">Balancing centre of buoyancy against centre of gravity across every payload configuration to keep the vehicle stable and trimmed.</p>
+            <a href="assets/auv-03-cb-cg.jpg" target="_blank" rel="noopener" class="fig fit" style="display:block;height:210px;cursor:zoom-in;"><img src="assets/auv-03-cb-cg.jpg" alt="CB and CG study"></a>
+            <div class="cap"><b>CB / CG study</b></div>
+          </div>
+          <div style="padding-left:22px;border-left:1px solid var(--rule);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;"><span class="cnum">3</span><h3 style="font-size:14.5px;">Thermal management</h3></div>
+            <p class="sub" style="margin-bottom:14px;">Moving heat out of a fully sealed hull and into the surrounding water without compromising the pressure boundary.</p>
+            <div class="fig" style="height:210px;"><img src="assets/auv-03-thermal.jpg" alt="Thermal study"></div>
+            <div class="cap"><b>Thermal study</b></div>
+          </div>
         </div>
-        <div style="position:relative; height:340px; border-radius:16px; overflow:hidden; background:var(--dark); color:#EDEAE4; border:1px solid var(--hair);">
-          <image-slot id="auv-detail-3" shape="rect" fit="cover" placeholder="Underwater Inspection vehicle — image 3"></image-slot>
-        </div>
+      </div>
+    </div>
   </section>
 
-  <section style="max-width:1560px;margin:0 auto;padding:70px 64px 104px;">
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">01 / MISSION</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the mission for Underwater Inspection vehicle here.</p>
+  <!-- ══ 04 DESIGN FOR MANUFACTURE ══ -->
+  <section class="sec">
+    <div class="pad">
+      <div class="shead">
+        <div class="snum">04</div>
+        <div>
+          <h2 class="stitle">Design for Manufacture</h2>
+          <p class="slead">Materials, processes and tolerancing chosen for a clean transition from prototype to low-volume build.</p>
         </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">02 / PROBLEM</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the problem for Underwater Inspection vehicle here.</p>
+      </div>
+      <div class="cols">
+        <div></div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:0;" class="g3">
+          <div style="padding-right:22px;">
+            <div class="fig" style="height:230px;"><img src="assets/auv-04-exploded.jpg" alt="Exploded assembly"></div>
+            <div class="cap"><b>Exploded assembly</b></div>
+          </div>
+          <div style="padding:0 22px;border-left:1px solid var(--rule);">
+            <div style="font-size:13px;font-weight:600;margin-bottom:7px;">Materials</div>
+            <ul class="sub" style="margin:0 0 16px;padding-left:15px;line-height:1.85;"><li>Hull material — to add</li><li>End caps — to add</li><li>Seals / O-rings — to add</li></ul>
+            <div style="font-size:13px;font-weight:600;margin-bottom:7px;">Processes</div>
+            <ul class="sub" style="margin:0 0 16px;padding-left:15px;line-height:1.85;"><li>CNC machining</li><li>Penetrator manufacturing</li><li>COTS integration</li></ul>
+            <div style="font-size:13px;font-weight:600;margin-bottom:7px;">Tolerancing</div>
+            <ul class="sub" style="margin:0;padding-left:15px;line-height:1.85;"><li>GD&amp;T on sealing faces</li><li>Thruster interface datums</li></ul>
+          </div>
+          <div style="padding-left:22px;border-left:1px solid var(--rule);">
+            <div class="fig" style="height:150px;"><img src="assets/auv-04-detail.jpg" alt="Machined detail"></div>
+            <div class="cap"><b>Sealing face detail</b></div>
+            <div class="box" style="margin-top:14px;padding:13px;background:var(--band);">
+              <div class="lbl" style="margin-bottom:6px;">Estimated BOM cost</div>
+              <div class="mono" style="font-size:15px;">To be filled in</div>
+            </div>
+          </div>
         </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">03 / REQUIREMENTS</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the requirements for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">04 / CONSTRAINTS</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the constraints for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">05 / CONCEPT</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the concept for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">06 / DESIGN EVOLUTION</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the design evolution for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">07 / MANUFACTURING</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the manufacturing for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">08 / TESTING</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the testing for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">09 / OUTCOME</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the outcome for Underwater Inspection vehicle here.</p>
-        </div>
-        <div style="padding:34px 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:start;">
-          <div class="mono" style="font-size:11px; letter-spacing:0.22em; color:var(--accent);">10 / LESSONS LEARNED</div>
-          <p style="font-size:16px; line-height:1.68; color:var(--dim); margin:0; max-width:70ch;">Write the lessons learned for Underwater Inspection vehicle here.</p>
-        </div>
-    <div style="border-top:1px solid var(--hair);"></div>
+      </div>
+    </div>
   </section>
 
-  <footer style="border-top:1px solid var(--hair);">
-    <div class="mono" style="max-width:1560px;margin:0 auto;padding:34px 64px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:10px;letter-spacing:0.18em;color:var(--dim);">
+  <!-- ══ 05 TESTING & VALIDATION ══ -->
+  <section class="sec alt">
+    <div class="pad">
+      <div class="shead">
+        <div class="snum">05</div>
+        <div>
+          <h2 class="stitle">Testing &amp; Validation</h2>
+          <p class="slead">Validated in the pressure chamber and in open water. Replace each caption with the actual test and result.</p>
+        </div>
+      </div>
+      <div class="cols">
+        <div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 210px;gap:14px;" class="g4">
+          <div><div class="fig" style="height:135px;"><img src="assets/auv-05-pressure-test.jpg" alt="Pressure test"></div><div class="cap"><b>Pressure test</b><br>Result to add</div></div>
+          <div><div class="fig" style="height:135px;"><img src="assets/auv-05-leak-test.jpg" alt="Leak test"></div><div class="cap"><b>Leak test</b><br>Result to add</div></div>
+          <div><div class="fig" style="height:135px;"><img src="assets/auv-05-thermal-test.jpg" alt="Thermal test"></div><div class="cap"><b>Thermal test</b><br>Result to add</div></div>
+          <div><div class="fig" style="height:135px;"><img src="assets/auv-05-field-trial.jpg" alt="Field trial"></div><div class="cap"><b>Field trial</b><br>Result to add</div></div>
+          <div class="box" style="padding:15px;background:#F1F6F2;border-color:#D3E4D8;display:flex;flex-direction:column;gap:12px;justify-content:center;">
+            <div class="check"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><circle cx="12" cy="12" r="10" fill="#1F6F4A"/><path d="m8 12.4 2.6 2.6L16.4 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="sub" style="display:block;color:var(--muted);">Pressure test</span><b style="font-size:13px;">PASS</b></span></div>
+            <div class="check"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><circle cx="12" cy="12" r="10" fill="#1F6F4A"/><path d="m8 12.4 2.6 2.6L16.4 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="sub" style="display:block;color:var(--muted);">Leak test</span><b style="font-size:13px;">PASS</b></span></div>
+            <div class="check"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><circle cx="12" cy="12" r="10" fill="#1F6F4A"/><path d="m8 12.4 2.6 2.6L16.4 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="sub" style="display:block;color:var(--muted);">Thermal test</span><b style="font-size:13px;">PASS</b></span></div>
+            <div class="check"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><circle cx="12" cy="12" r="10" fill="#1F6F4A"/><path d="m8 12.4 2.6 2.6L16.4 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="sub" style="display:block;color:var(--muted);">Field trial</span><b style="font-size:13px;">PASS</b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 / 07 ══ -->
+  <div class="pair" style="border-top:1px solid var(--rule);">
+    <section style="padding:34px 0;">
+      <div class="pad">
+        <div class="shead" style="margin-bottom:18px;">
+          <div class="snum">06</div>
+          <div>
+            <h2 class="stitle">Iterations &amp; Lessons</h2>
+            <p class="slead">How the vehicle changed between revisions, and what each one taught.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1fr;gap:12px;align-items:start;" class="g4">
+          <div>
+            <div style="font-size:13px;font-weight:600;">Rev A</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:8px;">(mass)</div>
+            <div class="fig" style="height:78px;"><img src="assets/auv-06-rev-a.jpg" alt="Rev A"></div>
+            <p class="plus" style="margin-top:8px;"><span>• Issue to add<br>• Issue to add</span></p>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">Rev B</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:8px;">(mass)</div>
+            <div class="fig" style="height:78px;"><img src="assets/auv-06-rev-b.jpg" alt="Rev B"></div>
+            <p class="plus" style="margin-top:8px;">• Change to add<br>• Change to add</p>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">Final</div>
+            <div class="sub" style="color:var(--muted);margin-bottom:8px;">(12 kg)</div>
+            <div class="fig" style="height:78px;"><img src="assets/auv-06-final.jpg" alt="Final"></div>
+            <p class="plus" style="margin-top:8px;">• Validated design<br>• 300 m rated</p>
+          </div>
+          <div class="box" style="padding:13px;background:var(--band);">
+            <div style="font-size:12.5px;font-weight:600;margin-bottom:8px;">Key Learnings</div>
+            <ul class="sub" style="margin:0;padding-left:14px;line-height:1.8;"><li>Learning to add</li><li>Learning to add</li><li>Learning to add</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:34px 0;">
+      <div class="pad">
+        <div class="shead" style="margin-bottom:18px;">
+          <div class="snum">07</div>
+          <div>
+            <h2 class="stitle">Outcome</h2>
+            <p class="slead">A modular, 300 m-rated inspection vehicle carrying a 10 kg payload at 12 kg vehicle mass.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:14px;align-items:start;" class="g3">
+          <div class="fig" style="height:180px;"><img src="assets/auv-07-outcome.jpg" alt="Final vehicle"></div>
+          <div class="box" style="padding:15px;background:#F2F5F8;border-color:#D8E0E8;display:flex;flex-direction:column;gap:11px;">
+            <div style="display:flex;align-items:baseline;gap:9px;"><b class="mono" style="font-size:15px;">300 m</b><span class="sub" style="color:var(--muted);">Depth rating</span></div>
+            <div style="display:flex;align-items:baseline;gap:9px;"><b class="mono" style="font-size:15px;">12 kg</b><span class="sub" style="color:var(--muted);">Vehicle mass</span></div>
+            <div style="display:flex;align-items:baseline;gap:9px;"><b class="mono" style="font-size:15px;">10 kg</b><span class="sub" style="color:var(--muted);">Payload capacity</span></div>
+            <div style="display:flex;align-items:baseline;gap:9px;"><b class="mono" style="font-size:15px;">Modular</b><span class="sub" style="color:var(--muted);">Thrusters &amp; hull</span></div>
+          </div>
+        </div>
+        <div style="background:#15181C;color:rgba(255,255,255,0.86);padding:18px 20px;margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;">
+          <p style="font-size:12.5px;line-height:1.6;">Add a closing reflection — what this project taught you about designing for pressure, modularity and field service.</p>
+          <div style="text-align:right;"><div style="font-size:12px;font-weight:600;color:#fff;">MANU PRASAD</div><div class="sub" style="color:rgba(255,255,255,0.5);">Senior Mechanical Design Engineer</div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer style="border-top:1px solid var(--rule);background:var(--band);">
+    <div class="pad mono" style="padding-top:20px;padding-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:10px;letter-spacing:0.12em;color:var(--muted);">
       <span>© 2026 MANU PRASAD — MECHANICAL DESIGN ENGINEER</span>
       <a href="index.html#works">BACK TO WORK →</a>
     </div>
   </footer>
+
+</div>
 </body>
 </html>
